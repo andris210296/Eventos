@@ -1,0 +1,30 @@
+
+drop database eventos;
+
+  create database eventos;
+
+    use eventos;
+
+    create table if not exists usuario(
+      id int(50) not null auto_increment primary key,
+      login varchar(50),
+      senha varchar(50),
+      nome varchar(50)
+    );
+
+    create table if not exists evento(
+      id int(50) not null auto_increment primary key,
+      criador int,
+      nome varchar(50),
+      data Date,
+      FOREIGN KEY (criador) REFERENCES usuario(id)
+      ON DELETE CASCADE
+
+    );
+
+    create table if not exists usuario_evento(
+      id_usuario int NOT NULL,
+      id_evento int NOT NULL,
+      PRIMARY KEY  (id_usuario, id_evento),
+      KEY us_ev (id_evento,id_usuario)
+    );
